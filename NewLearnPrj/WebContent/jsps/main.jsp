@@ -49,8 +49,8 @@ font-size: 10px;
 				<li role="presentation" class="active"><a target="../jsps/welcome.jsp">Home</a></li>
 				<li role="presentation"><a target="../jsps/fjnuHqjtNotice.jsp">福建师大后勤公告推送</a>
 				    <ul id="noticeMenu" class="nav nav-pills nav-stacked subMenu" hidden >
-                        <li role="presentation" ><a >邮件设置</a></li>
-                        <li role="presentation" ><a >时间设置</a></li>
+                        <li role="presentation" ><a >爬虫设置</a></li>
+                        <li role="presentation" ><a >推送设置</a></li>
                     </ul>
 				</li>
 				<li role="presentation"><a target="../jsps/2.jsp">2</a></li>
@@ -59,7 +59,7 @@ font-size: 10px;
 		<div id="iframeContent" class="col-md-9" ><!-- 窗体 -->
 		</div>
 	</div>
-	<footer >
+	<footer class="bs-docs-footer">
 	       <h4 class="text-center">footer</h4>
     </footer>
 </div>
