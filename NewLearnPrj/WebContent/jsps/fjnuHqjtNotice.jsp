@@ -34,6 +34,9 @@ $(document).ready(function(){
 $(function () {
     $("input[type=\"checkbox\"], input[type=\"radio\"]").not("[data-switch-no-init]").bootstrapSwitch();
     $("[name='my-checkbox']").bootstrapSwitch();
+    $("[name='my-checkbox']").click(function() {
+        alert($(this));
+    });
 })
 </script>
 <style type="text/css">
@@ -65,7 +68,8 @@ padding: 0px;
 	  <h3 class="text-left littleTittle">推送设置</h1>
         <div class="form-group ">
             <label >抓取消息立刻推送</label>
-            <input name="my-checkbox" type="checkbox" checked/>
+            <input name="my-checkbox" type="checkbox" checked="true" data-size="small" data-on-text="开" 
+            data-off-text="关" data-off-color="warning" />
         </div>
 	  <div class="form-group ">
         <label >推送邮箱</label>
