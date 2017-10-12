@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
-<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
-<link href="css/bootstrap-switch.css" rel="stylesheet">
-<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-<script type="text/javascript" src="js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
-<script src="js/bootstrap-switch.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/bootstrap/3.3.7/css/bootstrap.css" crossorigin="anonymous">
+<link href="<%=request.getContextPath()%>/jsps/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+<link href="<%=request.getContextPath()%>/jsps/css/bootstrap-switch.css" rel="stylesheet">
+<script src="<%=request.getContextPath()%>/jquery/3.2.1/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/bootstrap/3.3.7/js/bootstrap.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/jsps/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/jsps/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script src="<%=request.getContextPath()%>/jsps/js/bootstrap-switch.js"></script>
 
 <title>福建师大后勤公告推送</title>
 <script type="text/javascript">
@@ -35,16 +35,16 @@ $(function () {
     $("input[type=\"checkbox\"], input[type=\"radio\"]").not("[data-switch-no-init]").bootstrapSwitch();
     $("[name='my-checkbox']").bootstrapSwitch();
 })
-  
 </script>
 <style type="text/css">
-.littlebutton{
-padding: 0px;
-}
 .littleTittle{
 color: #0593fb;
 }
-
+.photoButton{
+border-style :none;
+background-color :rgba(0, 0, 0, 0);
+padding: 0px;
+}
 </style>
 </head>
 <body>
@@ -54,7 +54,7 @@ color: #0593fb;
     <h3 class="text-left littleTittle">爬虫设置</h1>
 	  <div id="catchTime" class="form-group">
 	   <label >抓取信息时间：每日</label>
-	   <button id="addCatchTime" type="button" class="btn btn-default glyphicon glyphicon-plus littlebutton" > </button>
+	    <button id="addCatchTime"  type="button" class="glyphicon glyphicon-plus-sign photoButton" > </button>
 	   <div class="input-group date form_time col-md-5" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
           <input class="form-control" size="16" type="text" value="" readonly>
           <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
@@ -63,21 +63,13 @@ color: #0593fb;
        </div>
 	  </div>
 	  <h3 class="text-left littleTittle">推送设置</h1>
-	   <!--  <div class="control-group">
-        <div><label >抓取消息立刻推送</label></div>
-        <div><input type="checkbox" data-off-color="warning" name="my-checkbox" checked /></div>
-      </div>-->
-		<div class="control-group">
-		    <label class="control-label" for="notification2">Notification 2</label>
-		    <div class="controls">
-		        <div class="switch" tabindex="0">
-		            <input id="notification2"  name="my-checkbox" type="checkbox" checked/>
-		        </div>
-		    </div>
-		</div>
-	  <div class="form-group">
+        <div class="form-group ">
+            <label >抓取消息立刻推送</label>
+            <input name="my-checkbox" type="checkbox" checked/>
+        </div>
+	  <div class="form-group ">
         <label >推送邮箱</label>
-        <div> <input type="email" class="form-control" size="16" id="exampleInputEmail1" placeholder="邮箱"></div>
+        <div > <input type="email" class="form-control" size="16px" id="exampleInputEmail1" placeholder="邮箱"></div>
       </div>
 	   <button type="submit" class="btn btn-default">保存</button>
     </form>
