@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>2</title>
+<title>Hello</title>
 </head>
-<body>
-<h1>2</h1>
-</body>
+   <body>
+   <h2>${message}</h2>
+   </body
 </html>
