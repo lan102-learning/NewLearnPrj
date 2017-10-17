@@ -15,7 +15,7 @@
 <script type="text/javascript">
 
     $(function() {
-        $.get("../jsps/welcome.jsp", function(data) {
+        $.get("<%=request.getContextPath()%>/welcome", function(data) {
             $("#iframeContent").html(data);//初始化加载界面  
         });
 
@@ -46,14 +46,14 @@ font-size: 10px;
 	<div class="row"><!-- body -->
 		<div class="col-md-3"><!-- 导航栏 -->
 			<ul id="indexMenu" class="nav nav-pills nav-stacked ">
-				<li role="presentation" class="active"><a target="<%=request.getContextPath()%>/jsps/welcome.jsp">Home</a></li>
-				<li role="presentation"><a target="<%=request.getContextPath()%>/jsps/notice/fjnuHqjtNotice.jsp">福建师大后勤公告推送</a>
+				<li role="presentation" class="active"><a target="<%=request.getContextPath()%>/welcome">Home</a></li>
+				<li role="presentation"><a target="<%=request.getContextPath()%>/notice">福建师大后勤公告推送</a>
 				    <ul id="noticeMenu" class="nav nav-pills nav-stacked subMenu" hidden >
                         <li role="presentation" ><a >爬虫设置</a></li>
                         <li role="presentation" ><a >推送设置</a></li>
                     </ul>
 				</li>
-				<li role="presentation"><a target="<%=request.getContextPath()%>/jsps/2.jsp">2</a></li>
+				<li role="presentation"><a target="<%=request.getContextPath()%>/s">2</a></li>
 			</ul>
 		</div>
 		<div id="iframeContent" class="col-md-9" ><!-- 窗体 -->
