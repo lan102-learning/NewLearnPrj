@@ -38,24 +38,43 @@
 font-size: 10px;
 /*background-color: rgba(51, 122, 183, 0.68);*/
 }
+.bar{
+float:left;  
+border-right: 1px solid #e1e1e1;   
+padding-bottom:1600px;  
+margin-bottom:-1600px;
+}
+@media screen and (max-width: 1000px) {
+    .hidden-xs {
+    display: none !important; 
+  } 
+
+}
+.hand{
+cursor:pointer;
+}
 </style>
 </head>
 <body>
 <div class="container-fluid"><!--  -->
-    <div class="row" ><h1 class="text-center">信息管理平台</h1></div><!-- header -->
+    <div class="row" >
+    <button  class="glyphicon glyphicon-align-justify hand text-center" hidden></button><!-- 屏幕过小时的导航栏 -->
+        <h1 class="text-center">信息管理平台</h1>
+    </div><!-- header -->
 	<div class="row"><!-- body -->
-		<div class="col-md-3"><!-- 导航栏 -->
+		<div class="col-md-3 hidden-xs"><!-- 导航栏 -->
 			<ul id="indexMenu" class="nav nav-pills nav-stacked ">
 				<li role="presentation" class="active"><a target="<%=request.getContextPath()%>/welcome">Home</a></li>
 				<li role="presentation"><a target="<%=request.getContextPath()%>/notice">福建师大后勤公告推送</a>
 				    <ul id="noticeMenu" class="nav nav-pills nav-stacked subMenu" hidden >
-                        <li role="presentation" ><a >爬虫设置</a></li>
-                        <li role="presentation" ><a >推送设置</a></li>
+                        <li role="presentation" ><a target="#">爬虫设置</a></li>
+                        <li role="presentation" ><a target="#">推送设置</a></li>
                     </ul>
 				</li>
 				<li role="presentation"><a target="<%=request.getContextPath()%>/s">2</a></li>
 			</ul>
 		</div>
+		<div class="bar"></div>
 		<div id="iframeContent" class="col-md-9" ><!-- 窗体 -->
 		</div>
 	</div>

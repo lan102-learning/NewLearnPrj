@@ -16,28 +16,45 @@
 <title>福建师大后勤公告推送</title>
 <script type="text/javascript">
 $(document).ready(function(){
-    $("#addCatchTime").click(function(){//动态生成 时间选择
-      $("#catchTime").append("<div class=\"input-group date form_time col-md-5\" data-date=\"\" data-date-format=\"hh:ii\" data-link-field=\"dtp_input3\" data-link-format=\"hh:ii\"> <input class=\"form-control\" size=\"16\" type=\"text\" value=\"\" readonly> <span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-remove\"></span></span> <span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-time\"></span></span> <span class=\"input-group-addon\"><span  class=\"glyphicon glyphicon-minus removeTime\"></span></span> </div>");
+    $("#addCatchTime").click(function(){//添加抓取时间    //动态生成 时间选择
+      $("#catchTime").append("<div class=\"input-group date form_time col-md-5 catchTimeDiv\" data-date=\"\" data-date-format=\"hh:ii\" data-link-field=\"dtp_input3\" data-link-format=\"hh:ii\"> <input name=\"catchTime\" class=\"form-control\" size=\"16\" type=\"text\" value=\"\" readonly> <span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-remove\"></span></span> <span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-time\"></span></span> <span class=\"input-group-addon\"><span  class=\"glyphicon glyphicon-minus removeTime\"></span></span> </div>");
       $.initDataPlugin();
     });
-  
-    $(document).on("click", ".removeTime", function() {
-        if($(".removeTime").length==1){
-            alert("至少需要一个时间");
-            return;
-        }
-        $(this).parent().parent().remove();
+    
+    $("#addReceiveEmail").click(function () {//添加接收邮箱
+        $("#addReceiveEmail").parent().append("<div class=\"input-group hand col-md-5 receiveEmailDiv\"> <input name=\"ReceiveEmail\" type=\"email\" class=\"form-control\"   placeholder=\"邮箱\"> <span class=\"input-group-addon\"><span  class=\"glyphicon glyphicon-minus removeReceiveEmail\"></span></span> </div>");
     });
     
   });    
   
-$(function () {
-    $("input[type=\"checkbox\"], input[type=\"radio\"]").not("[data-switch-no-init]").bootstrapSwitch();
-    $("[name='my-checkbox']").bootstrapSwitch();
-    $("[name='my-checkbox']").click(function() {
-        alert($(this));
+$(document).on("click", ".removeTime", function() {//删除抓抓取时间
+    if($(".catchTimeDiv").length==1){
+        alert("至少需要一个抓取时间");
+        return;
+    }
+    $(this).parent().parent().remove();
+});
+
+$(document).on("click", ".removeReceiveEmail", function() {//删除接受邮箱
+    if($(".receiveEmailDiv").length==1){
+        alert("接受邮箱至少需要一个");
+        return;
+    }
+    $(this).parent().parent().remove();
+});
+
+
+$(function () {//初始化 bootstrap-Switch
+    $("[name='isSendImm']").bootstrapSwitch({
+        onSwitchChange:function(event,state){
+            if(state==true){
+                $('#sendTimeDiv').attr('hidden', true);
+            }else{
+                $('#sendTimeDiv').attr('hidden', false);
+            }
+        }
     });
-})
+});
 </script>
 <style type="text/css">
 .littleTittle{
@@ -47,6 +64,9 @@ color: #0593fb;
 border-style :none;
 background-color :rgba(0, 0, 0, 0);
 padding: 0px;
+}
+.hand{
+cursor:pointer;
 }
 </style>
 </head>
@@ -58,28 +78,51 @@ padding: 0px;
 	  <div id="catchTime" class="form-group">
 	   <label >抓取信息时间：每日</label>
 	    <button id="addCatchTime"  type="button" class="glyphicon glyphicon-plus-sign photoButton" > </button>
-	   <div class="input-group date form_time col-md-5" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
-          <input class="form-control" size="16" type="text" value="" readonly>
+	   <div  class="input-group date form_time col-md-5 catchTimeDiv" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" 
+	       data-link-format="hh:ii">
+          <input name="catchTime" class="form-control" size="16" type="text" value="" readonly>
           <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
           <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
           <span class="input-group-addon"><span  class="glyphicon glyphicon-minus removeTime"></span></span>
        </div>
 	  </div>
 	  <h3 class="text-left littleTittle">推送设置</h1>
+	  <div class="form-group ">
+        <label >发送邮箱</label>
+        <div class="input-group  col-md-5 receiveEmailDiv">
+            <input name="sendEmail" type="email" class="form-control"   placeholder="发送邮箱">
+        </div>
+        <label >发送邮箱密码</label>
+        <div class="input-group  col-md-5 receiveEmailDiv">
+            <input name="sendEmailPwd" type="password" class="form-control"   placeholder="发送密码">
+        </div>
+      </div>
         <div class="form-group ">
             <label >抓取消息立刻推送</label>
-            <input name="my-checkbox" type="checkbox" checked="true" data-size="small" data-on-text="开" 
+            <input id="isSendImm" name="isSendImm"  type="checkbox" checked="true" data-size="small" data-on-text="开" 
             data-off-text="关" data-off-color="warning" />
+            <div id="sendTimeDiv" hidden>
+            <div class="input-group date form_time col-md-5" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii" hidden="hidden">
+	          <input id="sendTime" class="form-control" size="16" type="text" value="" readonly>
+	          <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+	          <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+	         <!-- <span class="input-group-addon"><span  class="glyphicon glyphicon-minus removeTime"></span></span>  --> 
+             </div>
+             </div>
         </div>
 	  <div class="form-group ">
-        <label >推送邮箱</label>
-        <div > <input type="email" class="form-control" size="16px" id="exampleInputEmail1" placeholder="邮箱"></div>
+        <label >接收邮箱</label>
+        <button id="addReceiveEmail"  type="button" class="glyphicon glyphicon-plus-sign photoButton" > </button>
+        <div class="input-group  col-md-5 receiveEmailDiv">
+	        <input name="ReceiveEmail" type="email" class="form-control"   placeholder="接收邮箱">
+	        <span class="input-group-addon"><span  class="hand glyphicon glyphicon-minus removeReceiveEmail" ></span></span>
+        </div>
       </div>
 	   <button type="submit" class="btn btn-default">保存</button>
     </form>
 </div>
 <script type="text/javascript">
-$.initDataPlugin = function(){
+$.initDataPlugin = function(){ //初始化bootstrap-datetimepicker
     $('.form_datetime').datetimepicker({
         //language:  'fr',
         weekStart: 1,

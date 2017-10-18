@@ -7,6 +7,6 @@
 <title>welcome</title>
 </head>
 <body>
-<h1>welcome</h1>
+<h1 class="text-center">welcome</h1>
 </body>
 </html>
