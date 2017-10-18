@@ -13,6 +13,13 @@
 <script src="<%=request.getContextPath()%>/bootstrap/3.3.7/js/bootstrap.js" crossorigin="anonymous"></script>
 <title>信息管理平台</title>
 <script type="text/javascript">
+/*$(document).ready(function(){
+    alert($(window).width());
+    if($(window).width()<=1000){
+        alert($(window).width());
+   };
+   
+});*/
 
     $(function() {
         $.get("<%=request.getContextPath()%>/welcome", function(data) {
@@ -34,32 +41,43 @@
     });
 </script>
 <style type="text/css">
-.subMenu{
-font-size: 10px;
-/*background-color: rgba(51, 122, 183, 0.68);*/
+.subMenu {
+	font-size: 10px;
+	/*background-color: rgba(51, 122, 183, 0.68);*/
 }
-.bar{
-float:left;  
-border-right: 1px solid #e1e1e1;   
-padding-bottom:1600px;  
-margin-bottom:-1600px;
+
+.bar {
+	float: left;
+	border-right: 1px solid #e1e1e1;
+	padding-bottom: 1600px;
+	margin-bottom: -1600px;
+}
+
+.hand {
+	cursor: pointer;
 }
 @media screen and (max-width: 1000px) {
     .hidden-xs {
     display: none !important; 
+  }
+  .show-xs{
+     display: inline-block !important;
   } 
 
 }
-.hand{
-cursor:pointer;
-}
+
+.show-xs{
+    display: none; 
+    float: left; 
+    margin-left: 20px;
+  } 
 </style>
 </head>
 <body>
 <div class="container-fluid"><!--  -->
     <div class="row" >
-    <button  class="glyphicon glyphicon-align-justify hand text-center" hidden></button><!-- 屏幕过小时的导航栏 -->
-        <h1 class="text-center">信息管理平台</h1>
+    <!-- 屏幕过小时的导航栏 -->
+        <h1 class="text-center" ><div class="show-xs" ><a class="glyphicon glyphicon-align-justify hand" style="color:black;"></a></div>信息管理平台</h1>
     </div><!-- header -->
 	<div class="row"><!-- body -->
 		<div class="col-md-3 hidden-xs"><!-- 导航栏 -->
@@ -75,7 +93,7 @@ cursor:pointer;
 			</ul>
 		</div>
 		<div class="bar"></div>
-		<div id="iframeContent" class="col-md-9" ><!-- 窗体 -->
+		<div id="iframeContent" class="col-md-9 " ><!-- 窗体 -->
 		</div>
 	</div>
 	<footer class="bs-docs-footer">

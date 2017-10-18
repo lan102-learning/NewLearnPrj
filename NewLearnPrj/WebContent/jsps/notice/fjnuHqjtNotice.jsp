@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,12 +16,12 @@
 <script type="text/javascript">
 $(document).ready(function(){
     $("#addCatchTime").click(function(){//添加抓取时间    //动态生成 时间选择
-      $("#catchTime").append("<div class=\"input-group date form_time col-md-5 catchTimeDiv\" data-date=\"\" data-date-format=\"hh:ii\" data-link-field=\"dtp_input3\" data-link-format=\"hh:ii\"> <input name=\"catchTime\" class=\"form-control\" size=\"16\" type=\"text\" value=\"\" readonly> <span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-remove\"></span></span> <span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-time\"></span></span> <span class=\"input-group-addon\"><span  class=\"glyphicon glyphicon-minus removeTime\"></span></span> </div>");
+      $("#catchTime").append("<div class=\"input-group date form_time col-md-5 catchTimeDiv\" data-date=\"\" data-date-format=\"hh:ii\" data-link-field=\"dtp_input3\" data-link-format=\"hh:ii\"> <input name=\"catchTimeList\" class=\"form-control\" size=\"16\" type=\"text\" value=\"\" readonly> <span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-remove\"></span></span> <span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-time\"></span></span> <span class=\"input-group-addon\"><span  class=\"glyphicon glyphicon-minus removeTime\"></span></span> </div>");
       $.initDataPlugin();
     });
     
     $("#addReceiveEmail").click(function () {//添加接收邮箱
-        $("#addReceiveEmail").parent().append("<div class=\"input-group hand col-md-5 receiveEmailDiv\"> <input name=\"ReceiveEmail\" type=\"email\" class=\"form-control\"   placeholder=\"邮箱\"> <span class=\"input-group-addon\"><span  class=\"glyphicon glyphicon-minus removeReceiveEmail\"></span></span> </div>");
+        $("#addReceiveEmail").parent().append("<div class=\"input-group hand col-md-5 receiveEmailDiv\"> <input name=\"receiveMailList\" type=\"email\" class=\"form-control\"   placeholder=\"邮箱\"> <span class=\"input-group-addon\"><span  class=\"glyphicon glyphicon-minus removeReceiveEmail\"></span></span> </div>");
     });
     
   });    
@@ -73,14 +72,14 @@ cursor:pointer;
 <body>
 <div class="container col-md-12" >
     <h1 class="text-center" >福建师大后勤公告推送</h1>
-    <form class="form-horizontal">
+    <form class="form-horizontal" method="post" action="<%=request.getContextPath()%>/notice/submitConf">
     <h3 class="text-left littleTittle">爬虫设置</h1>
 	  <div id="catchTime" class="form-group">
 	   <label >抓取信息时间：每日</label>
 	    <button id="addCatchTime"  type="button" class="glyphicon glyphicon-plus-sign photoButton" > </button>
 	   <div  class="input-group date form_time col-md-5 catchTimeDiv" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" 
 	       data-link-format="hh:ii">
-          <input name="catchTime" class="form-control" size="16" type="text" value="" readonly>
+          <input name="catchTimeList" class="form-control" size="16" type="text" value="" readonly>
           <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
           <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
           <span class="input-group-addon"><span  class="glyphicon glyphicon-minus removeTime"></span></span>
@@ -99,11 +98,11 @@ cursor:pointer;
       </div>
         <div class="form-group ">
             <label >抓取消息立刻推送</label>
-            <input id="isSendImm" name="isSendImm"  type="checkbox" checked="true" data-size="small" data-on-text="开" 
-            data-off-text="关" data-off-color="warning" />
+            <input  name="isSendImm"  type="checkbox" checked="true" data-size="small" data-on-text="开" 
+            data-off-text="关" data-off-color="warning" value="true"/>
             <div id="sendTimeDiv" hidden>
             <div class="input-group date form_time col-md-5" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii" hidden="hidden">
-	          <input id="sendTime" class="form-control" size="16" type="text" value="" readonly>
+	          <input name="sendTime" class="form-control" size="16" type="text" value="" readonly>
 	          <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 	          <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
 	         <!-- <span class="input-group-addon"><span  class="glyphicon glyphicon-minus removeTime"></span></span>  --> 
@@ -114,11 +113,11 @@ cursor:pointer;
         <label >接收邮箱</label>
         <button id="addReceiveEmail"  type="button" class="glyphicon glyphicon-plus-sign photoButton" > </button>
         <div class="input-group  col-md-5 receiveEmailDiv">
-	        <input name="ReceiveEmail" type="email" class="form-control"   placeholder="接收邮箱">
+	        <input name="receiveMailList" type="email" class="form-control"   placeholder="邮箱">
 	        <span class="input-group-addon"><span  class="hand glyphicon glyphicon-minus removeReceiveEmail" ></span></span>
         </div>
       </div>
-	   <button type="submit" class="btn btn-default">保存</button>
+	   <button type="submit" class="btn btn-default" >保存</button>
     </form>
 </div>
 <script type="text/javascript">
