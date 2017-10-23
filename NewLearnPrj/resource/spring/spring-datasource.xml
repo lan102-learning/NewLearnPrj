@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context.xsd
+ http://www.springframework.org/schema/tx
+ http://www.springframework.org/schema/tx/spring-tx.xsd
+ http://www.springframework.org/schema/aop
+ http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<description>spring-datasource</description>
+	
+	<context:component-scan base-package="com.learn.mmp"></context:component-scan>
+	<context:property-placeholder location="classpath:spring/jdbc.properties" />
+	<!-- DBCP 数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+
+		<!-- 连接池连接数初始值 -->
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<!-- 连接池最大空闲值，释放多余的不用的连接，释放到多少为止, 新版本该参数已弃用 -->
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		<!-- 连接池最小空闲值，当空闲连接数小于这个数的时候，连接池就会去申请一些连接以免高峰期来不及申请 -->
+		<property name="minIdle" value="${jdbc.minIdle}" />
+		<!-- 是否缓存preparedStatement，支持游标的数据库有性能提升。 -->
+		<property name="poolPreparedStatements" value="${jdbc.poolPreparedStatements}" />
+		<!-- <property name="validationQuery" value="${jdbc.validationQuery}" /> -->
+		<property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
+		<property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+		<property name="testOnReturn" value="${jdbc.testOnReturn}" />
+	</bean>
+	
+    
+</beans>

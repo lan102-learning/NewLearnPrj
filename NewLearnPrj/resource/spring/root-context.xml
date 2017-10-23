@@ -15,5 +15,7 @@
 		<property name="prefix" value="/jsps/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
- -->
+ -->  
+   <!-- 配置数据源与事务信息 -->
+    <import resource="classpath:spring/spring-datasource.xml" />
 </beans>
