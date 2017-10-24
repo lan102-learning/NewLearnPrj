@@ -23,7 +23,7 @@ $(document).ready(function(){
     $("#addReceiveEmail").click(function () {//添加接收邮箱
         $("#addReceiveEmail").parent().append("<div class=\"input-group hand col-md-5 receiveEmailDiv\"> <input name=\"receiveMailList\" type=\"email\" class=\"form-control\"   placeholder=\"邮箱\"> <span class=\"input-group-addon\"><span  class=\"glyphicon glyphicon-minus removeReceiveEmail\"></span></span> </div>");
     });
-    
+    $.initDataPlugin();
   });    
   
 $(document).on("click", ".removeTime", function() {//删除抓抓取时间
@@ -88,11 +88,11 @@ cursor:pointer;
 	  <h3 class="text-left littleTittle">推送设置</h1>
 	  <div class="form-group ">
         <label >发送邮箱</label>
-        <div class="input-group  col-md-5 receiveEmailDiv">
+        <div class="input-group  col-md-5 sendEmailDiv">
             <input name="sendEmail" type="email" class="form-control"   placeholder="发送邮箱">
         </div>
         <label >发送邮箱密码</label>
-        <div class="input-group  col-md-5 receiveEmailDiv">
+        <div class="input-group  col-md-5 sendEmailDiv">
             <input name="sendEmailPwd" type="password" class="form-control"   placeholder="发送密码">
         </div>
       </div>
@@ -112,7 +112,7 @@ cursor:pointer;
 	  <div class="form-group ">
         <label >接收邮箱</label>
         <button id="addReceiveEmail"  type="button" class="glyphicon glyphicon-plus-sign photoButton" > </button>
-        <div class="input-group  col-md-5 receiveEmailDiv">
+        <div class="input-group  col-md-5 receiveEmailDiv" >
 	        <input name="receiveMailList" type="email" class="form-control"   placeholder="邮箱">
 	        <span class="input-group-addon"><span  class="hand glyphicon glyphicon-minus removeReceiveEmail" ></span></span>
         </div>

@@ -16,7 +16,7 @@ public class HelloWorldController {
 
     @RequestMapping("**")
     public String error404() {
-        return "/jsps/error/404.jsp";
+        return "/error/404";
     }
 
     @RequestMapping("/helloworld")
@@ -25,7 +25,7 @@ public class HelloWorldController {
         model.addAttribute("message", "Hello World!");
         // System.out.println("hello/hello");
         helloService.print();
-        return "/jsps/hello/hello.jsp";
+        return "/hello/hello";
     }
 
     public HelloService getHelloService() {

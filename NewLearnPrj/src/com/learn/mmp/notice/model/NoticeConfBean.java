@@ -3,7 +3,9 @@ package com.learn.mmp.notice.model;
 import java.util.List;
 
 public class NoticeConfBean {
-    private String catchTime;
+    private static final String url = "../resource/mmp/notice.properties";
+    
+    //private String catchTime;
     private List<String> catchTimeList;
     private String sendEmail;
     private String sendEmailPwd;
@@ -15,27 +17,30 @@ public class NoticeConfBean {
     public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append("NoticeConfBean [catchTimeList=" );
+        if(catchTimeList.size()==0) {
         for (String string : catchTimeList) {
             sb.append("," + string);
-        }
-        sb.append(", sendEmail=" + sendEmail + ", sendEmailPwd="  + sendEmailPwd + ", isSendImm=" + isSendImm + ", sendTime=" + sendTime );
+        }}
+        sb.append("], sendEmail=" + sendEmail + ", sendEmailPwd="  + sendEmailPwd + ", isSendImm=" + isSendImm + ", sendTime=" + sendTime );
         
         sb.append(", receiveMailList=");
+        if(receiveMailList.size()==0) {
         for (String string : receiveMailList) {
             sb.append("," + string);
-        }
+        }}
         sb.append("]");
         return sb.toString();
     }
+    
     ////////////////////// getter & setter////////////////////////
 
-    public String getCatchTime() {
+    /*public String getCatchTime() {
         return catchTime;
     }
 
     public void setCatchTime(String catchTime) {
         this.catchTime = catchTime;
-    }
+    }*/
 
     public List<String> getCatchTimeList() {
         return catchTimeList;
@@ -61,11 +66,11 @@ public class NoticeConfBean {
         this.sendEmailPwd = sendEmailPwd;
     }
 
-    public boolean isSendImm() {
+    public boolean getIsSendImm() {
         return isSendImm;
     }
 
-    public void setSendImm(boolean isSendImm) {
+    public void setIsSendImm(boolean isSendImm) {
         this.isSendImm = isSendImm;
     }
 
@@ -83,6 +88,10 @@ public class NoticeConfBean {
 
     public void setSendTime(String sendTime) {
         this.sendTime = sendTime;
+    }
+
+    public static String getUrl() {
+        return url;
     }
 
 }

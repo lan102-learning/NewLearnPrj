@@ -10,12 +10,12 @@
 
 	<context:component-scan base-package="com.learn.mmp" />
  
-	<!-- <bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/jsps/" />
 		<property name="suffix" value=".jsp" />
-	</bean>
- -->  
+	</bean> 
+   
    <!-- 配置数据源与事务信息 -->
     <import resource="classpath:spring/spring-datasource.xml" />
+    
 </beans>

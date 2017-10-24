@@ -3,10 +3,11 @@ package com.learn.mmp.main.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.learn.mmp.base.serivice.BaseService;
 import com.learn.mmp.main.dao.HelloDao;
 
 @Service
-public class HelloService {
+public class HelloService extends BaseService{
     @Autowired
     private HelloDao helloDao ;
     
