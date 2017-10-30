@@ -1,30 +1,90 @@
 package com.learn.mmp.utils;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.Parameter;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-import org.springframework.beans.propertyeditors.CustomBooleanEditor;
-
 import com.learn.mmp.notice.model.NoticeConfBean;
 
-public class PrpoUtil {
+
+/**
+ * 配置文件工具类
+ * @author liuwenkang
+ *
+ */
+public class PropUtilTest {
     private static final String url = "C:/Users/liuwenkang/git/NewLearnPrj/NewLearnPrj/resource/mmp/notice.properties";
 
-    public static void main(String[] args)
+    public static Object getProp(String url,Class c)
+            throws UnsupportedEncodingException, IOException, ClassNotFoundException, InstantiationException,
+            IllegalAccessException, SecurityException, IllegalArgumentException, InvocationTargetException {
+
+        Properties prop = new Properties();
+        FileInputStream fis = new FileInputStream(url);
+        prop.load(fis);
+        Object obj = c.newInstance();
+        Field[] fs = c.getDeclaredFields();
+        String fieldName;// 变量名
+        StringBuffer getMethodName; // 方法名
+        Class valueClass = null;// 变量类型
+        for (Field field : fs) {
+            fieldName = field.getName();
+            Method getMethod = null;
+            // 拼接set方法名
+            getMethodName = new StringBuffer("set");
+            getMethodName.append(fieldName.substring(0, 1).toUpperCase());
+            getMethodName.append(fieldName.substring(1));
+
+             //System.out.println("sb:"+getMethodName);
+             //System.out.println(field.getType().toString());
+            
+            try {
+                // 获取set方法
+                valueClass = field.getType();
+                getMethod = c.getDeclaredMethod(getMethodName.toString(), valueClass);
+            } catch (NoSuchMethodException e) {
+                //System.out.println("noSuchMethod:" + getMethodName + "\n============");
+                continue;
+            }
+
+            //System.out.println("realMethod:" + getMethod.getName() + "\n============");
+            if  (valueClass==String.class) {
+                getMethod.invoke(obj, prop.getProperty(fieldName));// 执行set方法
+            }
+            if(valueClass==List.class) {
+                String[] values =  prop.getProperty(fieldName).split(",");
+                List<String> list = Arrays.asList(values);
+                getMethod.invoke(obj, list);// 执行set方法
+            }
+            if(valueClass==boolean.class) {
+                getMethod.invoke(obj, setBooleanValue(prop.getProperty(fieldName)));// 执行set方法
+            }
+            
+            
+        }
+        //System.out.println(bean.toString());
+        //System.out.println(new NoticeConfBean().toString());
+        return obj;
+
+    }
+
+    private static boolean setBooleanValue(String value) {
+        boolean result = false;
+        if (value != null) {
+            result = ("true".equals(value.toLowerCase())) ? true : false;
+        }
+        return result;
+    }
+
+
+    public static void main1(String[] args)
             throws UnsupportedEncodingException, IOException, ClassNotFoundException, InstantiationException,
             IllegalAccessException, SecurityException, IllegalArgumentException, InvocationTargetException {
 
@@ -38,6 +98,7 @@ public class PrpoUtil {
         String fieldName;// 变量名
         StringBuffer getMethodName; // 方法名
         Class valueClass = null;// 变量类型
+        NoticeConfBean bean = null;//结果
         for (Field field : fs) {
             fieldName = field.getName();
             Method getMethod = null;
@@ -66,15 +127,26 @@ public class PrpoUtil {
                 System.out.println("noSuchMethod:" + getMethodName + "\n============");
                 continue;
             }
-            if (List.class == valueClass) {
-                continue;
-            }
-            System.out.println("realMethod:" + getMethod.getName() + "\n============");
-            if (getMethod != null) {
-                getMethod.invoke(obj, new String("url"));// 执行set方法
-            } 
-        }
 
+            System.out.println("realMethod:" + getMethod.getName() + "\n============");
+            /*if (getMethod != null) {
+                getMethod.invoke(obj, new String("url"));// 执行set方法
+            } */
+            if  (valueClass==String.class) {
+                getMethod.invoke(obj, prop.getProperty(fieldName));// 执行set方法
+            }
+            if(valueClass==List.class) {
+                String[] values =  prop.getProperty(fieldName).split(",");
+                List<String> list = Arrays.asList(values);
+                getMethod.invoke(obj, list);// 执行set方法
+            }
+            if(valueClass==boolean.class) {
+                getMethod.invoke(obj, setBooleanValue(prop.getProperty(fieldName)));// 执行set方法
+            }
+        }
+        bean = (NoticeConfBean)obj;
+            System.out.println(bean.toString());
+        //System.out.println(new NoticeConfBean().toString());
         // --------------------------------------
         /*
          * Class c = NoticeConfBean.class; Field[] fs = c.getDeclaredFields();
@@ -102,22 +174,9 @@ public class PrpoUtil {
          */
 
     }
-
-    private boolean setBooleanValue(String value) {
-        boolean result = false;
-        if (value != null) {
-            result = ("true".equals(value.toLowerCase())) ? true : false;
-        }
-        return result;
-    }
-
-    private List<String> setListValue(Field field) {
-        List resultList = new ArrayList<String>();
-
-        return resultList;
-    }
-
-    public static void main1(String[] args) {
-        System.out.println("!");
+    public static void main(String[] args) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, SecurityException, IllegalArgumentException, InvocationTargetException {
+        PropUtil util = new PropUtil();
+        NoticeConfBean bean = (NoticeConfBean)util.getProp("C:/Users/liuwenkang/git/NewLearnPrj/NewLearnPrj/resource/mmp/notice.properties", NoticeConfBean.class, null);
+        System.out.println(bean);
     }
 }
